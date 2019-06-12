@@ -1,0 +1,8 @@
+out*
+.idea/*
+jogl*
+*.iml
+Implemented
+*.class
+*.project
+*.classpath
