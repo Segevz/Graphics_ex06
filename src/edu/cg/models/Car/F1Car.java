@@ -59,4 +59,7 @@ public class F1Car implements IRenderable {
 		front = new Front();
 		front.init(gl);
 	}
+	@Override
+	public void destroy(GL2 gl) {
+	}
 }
