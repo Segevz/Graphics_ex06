@@ -17,19 +17,20 @@ public class F1Car implements IRenderable {
 	// 		 * We deleted all components source files (Back.java, Center.java...), so put your components implementation as well.
 	//       * You also need to setup material properties for different
 	//       * components of the car.
-	
-	Center center;
-	Back back;
-	Front front;
 
 	@Override
 	public void render(GL2 gl) {
 		// Render the whole car. 
 		// Here You should only render the three parts: back, center and front.
 		
+		Back back = new Back();
+        Center center = new Center();
+        Front front = new Front();
+		
 		// Render center of car
 	
 		gl.glPushMatrix();
+		gl.glEnable(gl.GL_COLOR_MATERIAL);
 		center.render(gl);
 
 		// Render back of car
@@ -39,7 +40,8 @@ public class F1Car implements IRenderable {
 		// Render front of car
 		gl.glTranslated((Specification.F_FRONT_LENGTH + Specification.B_LENGTH) / 2 + Specification.C_BASE_LENGTH, 0, 0);
 		front.render(gl);
-
+		
+		gl.glDisable(gl.GL_COLOR_MATERIAL);
 		gl.glPopMatrix();
 	}
 
@@ -50,15 +52,8 @@ public class F1Car implements IRenderable {
 
 	@Override
 	public void init(GL2 gl) {
-		center = new Center();
-		center.init(gl);
-
-		back = new Back();
-		back.init(gl);
-
-		front = new Front();
-		front.init(gl);
 	}
+	
 	@Override
 	public void destroy(GL2 gl) {
 	}
