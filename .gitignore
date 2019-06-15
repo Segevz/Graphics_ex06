@@ -7,3 +7,4 @@ Implemented
 *.project
 *.classpath
 natives
+*.xml
