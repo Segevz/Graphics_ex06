@@ -1,65 +1,73 @@
 package edu.cg.models.Car;
 
+import com.jogamp.opengl.GL2;
+import edu.cg.algebra.Point;
+import edu.cg.models.IRenderable;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.jogamp.opengl.*;
 
-import edu.cg.algebra.Point;
-import edu.cg.models.IRenderable;
 
-/**
- * A F1 Racing Car.
- *
- */
-public class F1Car implements IRenderable {
-	// TODO: Put your implementation from previous exercise.
-	// 		 * We deleted all components source files (Back.java, Center.java...), so put your components implementation as well.
-	//       * You also need to setup material properties for different
-	//       * components of the car.
-	
-	Center center;
-	Back back;
-	Front front;
 
-	@Override
-	public void render(GL2 gl) {
-		// Render the whole car. 
-		// Here You should only render the three parts: back, center and front.
-		
-		// Render center of car
-	
-		gl.glPushMatrix();
-		center.render(gl);
 
-		// Render back of car
-		gl.glTranslated((-1) * (Specification.B_LENGTH + Specification.C_BASE_LENGTH) / 2, 0, 0);
-		back.render(gl);
-		
-		// Render front of car
-		gl.glTranslated((Specification.F_FRONT_LENGTH + Specification.B_LENGTH) / 2 + Specification.C_BASE_LENGTH, 0, 0);
-		front.render(gl);
 
-		gl.glPopMatrix();
-	}
+public class F1Car
+  implements IRenderable
+{
+  public F1Car() {}
+  
+  public void render(GL2 gl)
+  {
+    new Center().render(gl);
+    gl.glPushMatrix();
+    gl.glTranslated(-0.3875D, 0.0D, 0.0D);
+    new Back().render(gl);
+    gl.glPopMatrix();
+    gl.glPushMatrix();
+    gl.glTranslated(0.425D, 0.0D, 0.0D);
+    new Front().render(gl);
+    gl.glPopMatrix();
+  }
+  
 
-	@Override
-	public String toString() {
-		return "F1Car";
-	}
+  public String toString()
+  {
+    return "F1Car";
+  }
+  
 
-	@Override
-	public void init(GL2 gl) {
-		center = new Center();
-		center.init(gl);
 
-		back = new Back();
-		back.init(gl);
+  public void init(GL2 gl) {}
+  
 
-		front = new Front();
-		front.init(gl);
-	}
-	@Override
-	public void destroy(GL2 gl) {
-	}
+  public void destroy(GL2 gl) {}
+  
+
+  private Point pointMatrixMult(double[] mat, Point p)
+  {
+    float temp = 0.0F;
+    float[] arr = p.toArray();
+    float[] res = new float[3];
+    for (int r = 0; r < 3; r++) {
+      for (int c = 0; c < 3; c++) {
+        temp = (float)(temp + mat[(4 * r + c)] * arr[c]);
+      }
+      temp = (float)(temp + mat[(4 * r + 3)]);
+      res[r] = temp;
+      temp = 0.0F;
+    }
+    Point resP = new Point(0.0D);
+    x = res[0];
+    y = res[1];
+    z = res[2];
+    return resP;
+  }
+  
+  public List<Point> getPointsOnSurface(GL2 gl) {
+    LinkedList<Point> retList = new LinkedList();
+    double[] temp = new double[16];
+    gl.glGetDoublev(2982, temp, 0);
+    retList.add(pointMatrixMult(temp, new Point(0.0D)));
+    return retList;
+  }
 }
