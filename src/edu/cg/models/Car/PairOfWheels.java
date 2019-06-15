@@ -12,19 +12,19 @@ public class PairOfWheels implements IRenderable {
 	@Override
 	public void render(GL2 gl) {
 		gl.glPushMatrix();
-		gl.glTranslated(0.0, 0.0, -Specification.TIRE_DEPTH);
+		gl.glTranslated(0.0, 0.0, -0.1);
 		GLU glu = new GLU();
 		Materials.SetDarkGreyMetalMaterial(gl);
 		GLUquadric quad = glu.gluNewQuadric();
-		glu.gluCylinder(quad, Specification.PAIR_OF_WHEELS_ROD_RADIUS, Specification.PAIR_OF_WHEELS_ROD_RADIUS, Specification.PAIR_OF_WHEELS_ROD_DEPTH, 40, 1);
-		// Render both wheels
-		gl.glTranslated(0, 0, (Specification.TIRE_DEPTH + Specification.PAIR_OF_WHEELS_ROD_DEPTH) / 2);
-		wheel.render(gl);
-		gl.glTranslated(0, 0, - Specification.TIRE_DEPTH - Specification.PAIR_OF_WHEELS_ROD_DEPTH);
+		glu.gluCylinder(quad, 0.01, 0.01, 0.2, 20, 1);
+		gl.glTranslated(0.0, 0.0, (Specification.PAIR_OF_WHEELS_ROD_DEPTH + 0.3 * Specification.TIRE_DEPTH));
+		this.wheel.render(gl);
+		gl.glTranslated(0.0, 0.0, -(Specification.PAIR_OF_WHEELS_ROD_DEPTH + 0.7 * Specification.TIRE_DEPTH));
 		gl.glRotated(180.0, 0.0, 1.0, 0.0);
-		wheel.render(gl);
+		this.wheel.render(gl);
 		gl.glPopMatrix();
-		glu.gluDeleteQuadric(quad);	}
+		glu.gluDeleteQuadric(quad);
+	}
 
 	@Override
 	public void init(GL2 gl) {

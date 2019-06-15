@@ -57,9 +57,9 @@ public class F1Car
       temp = 0.0F;
     }
     Point resP = new Point(0.0D);
-    x = res[0];
-    y = res[1];
-    z = res[2];
+    resP.x = res[0];
+    resP.y = res[1];
+    resP.z = res[2];
     return resP;
   }
   
