@@ -38,5 +38,33 @@ public class Materials {
 	}
 
     public static void setWoodenBoxMaterial(GL2 gl) {
+		float[] ambient = new float[]{0.4f, 0.4f, 0.4f, 1.0f};
+		float[] diffuse = new float[]{0.715f, 0.4285f, 0.18145f, 1.0f};
+		float[] specular = new float[]{0.393549f, 0.271905f, 0.166720f, 1.0f};
+		gl.glMaterialf(1028, 5633, 25.6f);
+		gl.glMaterialfv(1028, 4608, ambient, 0);
+		gl.glMaterialfv(1028, 4609, diffuse, 0);
+		gl.glMaterialfv(1028, 4610, specular, 0);
     }
+
+	public static void setGreenMaterial(GL2 gl) {
+		float[] ambient = new float[]{0.0215f, 0.1745f, 0.0215f, 1.0f};
+		float[] diffuse = new float[]{0.07569f, 0.61425f, 0.07569f, 1.0f};
+		float[] specular = new float[]{0.633f, 0.72781f, 0.632f, 1.0f};
+		gl.glMaterialf(1028, 5633, 128.0f);
+		gl.glMaterialfv(1028, 4608, ambient, 0);
+		gl.glMaterialfv(1028, 4609, diffuse, 0);
+		gl.glMaterialfv(1028, 4610, specular, 0);
+	}
+
+	public static void setAsphaltMaterial(GL2 gl) {
+		float[] ambient = new float[]{0.15375f, 0.15f, 0.16625f, 1.0f};
+		float[] diffuse = new float[]{0.68275f, 0.67f, 0.72525f, 1.0f};
+		float[] specular = new float[]{0.33274f, 0.328635f, 0.346435f, 1.0f};
+		gl.glMaterialf(1028, 5633, 38.4f);
+		gl.glMaterialfv(1028, 4608, ambient, 0);
+		gl.glMaterialfv(1028, 4609, diffuse, 0);
+		gl.glMaterialfv(1028, 4610, specular, 0);
+	}
+
 }

@@ -31,12 +31,12 @@ public class TrackSegment implements IRenderable {
 		double numberOfLanes = 4.0;
 		double deltaZ = difficulty < 0.25 ? 100.0 : (difficulty < 0.5 ? 75.0 : 50.0);
 
-		boxesLocations = new LinkedList<Point>();
+		boxesLocations = new LinkedList<>();
 		for (double dz = deltaZ; dz < TRACK_LENGTH - BOX_LENGTH / 2.0; dz += deltaZ) {
 			int boxCount = 0;
 			boolean flag = false;
 			for (int i = 0; i < 12; i++) {
-				double dx = -((double) numberOfLanes / 2.0) * ((ASPHALT_TEXTURE_WIDTH - 2.0) / numberOfLanes) + BOX_LENGTH / 2.0
+				double dx = -( numberOfLanes / 2.0) * ((ASPHALT_TEXTURE_WIDTH - 2.0) / numberOfLanes) + BOX_LENGTH / 2.0
 						+ i * BOX_LENGTH;
 				if (Math.random() < difficulty) {
 					boxesLocations.add(new Point(dx, BOX_LENGTH / 2.0, -dz));
@@ -63,13 +63,62 @@ public class TrackSegment implements IRenderable {
 		this.renderGrass(gl);
 	}
 
+	private void renderGrass(GL2 gl) {
+		Materials.setGreenMaterial(gl);
+		double dx = 15.0;
+		gl.glTranslated(dx, 0.0, 0.0);
+		this.renderQuadraticTexture(gl, this.grassTexture, GRASS_TEXTURE_WIDTH, GRASS_TEXTURE_DEPTH, 2, TrackSegment.TRACK_LENGTH);
+		gl.glTranslated(-2.0 * dx, 0.0, 0.0);
+		this.renderQuadraticTexture(gl, this.grassTexture, GRASS_TEXTURE_WIDTH, GRASS_TEXTURE_DEPTH, 2, TrackSegment.TRACK_LENGTH);
+		gl.glPopMatrix();
+	}
+
+	private void renderAsphalt(GL2 gl) {
+		Materials.setAsphaltMaterial(gl);
+		gl.glPushMatrix();
+		this.renderQuadraticTexture(gl, this.roadTexture, ASPHALT_TEXTURE_WIDTH, ASPHALT_TEXTURE_DEPTH, 6, TrackSegment.TRACK_LENGTH);
+		gl.glPopMatrix();
+	}
+
+	private void renderQuadraticTexture(GL2 gl, Texture tex, double quadWidth, double quadDepth, int split, double totalDepth) {
+		gl.glEnable(GL2.GL_TEXTURE_2D);
+		tex.bind(gl);
+
+		gl.glTexEnvi(GL2.GL_TEXTURE_ENV,GL2.GL_TEXTURE_ENV_MODE, GL2.GL_MODULATE);
+		gl.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MIN_FILTER, GL2.GL_LINEAR_MIPMAP_LINEAR);
+		gl.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MAG_FILTER, GL2.GL_LINEAR);
+		gl.glTexParameteri(GL2.GL_TEXTURE_2D, GL2.GL_TEXTURE_MAX_LOD, 1);
+		gl.glColor3d(1.0, 0.0, 0.0);
+		GLU glu = new GLU();
+		GLUquadric quad = glu.gluNewQuadric();
+		gl.glColor3d(1.0, 0.0, 0.0);
+		gl.glNormal3d(0.0, 1.0, 0.0);
+		double d = 1.0 / (double)split;
+		double dz = quadDepth / (double)split;
+		double dx = quadWidth / (double)split;
+		for (double tz = 0.0; tz < totalDepth; tz += quadDepth) {
+			for (double i = 0.0; i < (double)split; i += 1.0) {
+				gl.glBegin(5);
+				for (double j = 0.0; j <= (double)split; j += 1.0) {
+					gl.glTexCoord2d(j * d, (i + 1.0) * d);
+					gl.glVertex3d(-quadWidth / 2.0 + j * dx, 0.0, -tz - (i + 1.0) * dz);
+					gl.glTexCoord2d(j * d, i * d);
+					gl.glVertex3d(-quadWidth / 2.0 + j * dx, 0.0, -tz - i * dz);
+				}
+				gl.glEnd();
+			}
+		}
+		glu.gluDeleteQuadric(quad);
+		gl.glDisable(GL2.GL_TEXTURE_2D);
+	}
+
 
 	private void renderBoxes(GL2 gl) {
 		Materials.setWoodenBoxMaterial(gl);
 		for (Point p : this.boxesLocations) {
 			gl.glPushMatrix();
 			gl.glTranslated(p.x, 0.0, p.z);
-			this.box.render(gl);
+			this.boxTemplate.render(gl);
 			gl.glPopMatrix();
 		}
 	}
