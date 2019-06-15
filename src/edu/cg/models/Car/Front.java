@@ -45,7 +45,7 @@ public class Front implements IRenderable {
 		// Render front pair of wheels
 		wheels.render(gl);
 		gl.glPopMatrix();
-}
+	}
 
 	@Override
 	public void init(GL2 gl) {

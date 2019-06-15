@@ -112,7 +112,6 @@ public class TrackSegment implements IRenderable {
 		gl.glDisable(GL2.GL_TEXTURE_2D);
 	}
 
-
 	private void renderBoxes(GL2 gl) {
 		Materials.setWoodenBoxMaterial(gl);
 		for (Point p : this.boxesLocations) {
@@ -138,6 +137,6 @@ public class TrackSegment implements IRenderable {
 	public void destroy(GL2 gl) {
 		this.roadTexture.destroy(gl);
 		this.grassTexture.destroy(gl);
-		this.boxTemplate.destroy(gl);	}
-
+		this.boxTemplate.destroy(gl);	
+		}
 }

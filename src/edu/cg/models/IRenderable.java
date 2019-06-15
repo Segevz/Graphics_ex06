@@ -32,6 +32,4 @@ public interface IRenderable {
 	 * 			  GL context
 	 */			  
 	public void destroy(GL2 gl);
-	
-
 }

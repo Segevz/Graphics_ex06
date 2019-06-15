@@ -124,6 +124,5 @@ public class GameState {
 			updateCarVelocity(newVelocity);
 			updateNextTranslation(new Vec(dx, 0.0, dz));
 		}
-
 	}
 }

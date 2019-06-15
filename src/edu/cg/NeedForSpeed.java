@@ -28,7 +28,6 @@ public class NeedForSpeed implements GLEventListener {
 	private boolean isModelInitialized = false;
 	private boolean isDayMode = true;
 
-
 	public NeedForSpeed(Component glPanel) {
 		this.glPanel = glPanel;
 		gameState = new GameState();
@@ -74,7 +73,6 @@ public class NeedForSpeed implements GLEventListener {
 		GLU glu = new GLU();
 		glu.gluLookAt(0.0 + (double)this.carCameraTranslation.x, 1.8 + (double)this.carCameraTranslation.y, 2.0 + (double)this.carCameraTranslation.z, 0.0 + (double)this.carCameraTranslation.x, 1.5 + (double)this.carCameraTranslation.y, -5.0 + (double)this.carCameraTranslation.z, 0.0, 0.7, -0.3);
 	}
-
 
 	private void setupLights(GL2 gl) {
 		if (isDayMode) {
