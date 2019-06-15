@@ -46,8 +46,8 @@ public class SkewedBox implements IRenderable {
 	public void render(GL2 gl) {
 		
 		Vec normal = null;
-	       if (this.useTexture) {
-	           assert (texureBox != null && gl != null);
+	       if (this.enableTexture) {
+	           assert (textureBox != null && gl != null);
 	           this.initTexture(gl);
 	       }
 		
