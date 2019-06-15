@@ -36,4 +36,8 @@ public class PairOfWheels implements IRenderable {
 		return "PairOfWheels";
 	}
 
+	@Override
+	public void destroy(GL2 gl) {
+	}
+
 }

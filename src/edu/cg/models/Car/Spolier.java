@@ -55,4 +55,8 @@ public class Spolier implements IRenderable {
 	public String toString() {
 		return "Spoiler";
 	}
+
+	@Override
+	public void destroy(GL2 gl) {
+	}
 }
