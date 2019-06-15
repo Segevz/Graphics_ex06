@@ -58,7 +58,7 @@ public class Materials {
 	public static void setAsphaltMaterial(GL2 gl) {
 		float[] ambient = new float[]{.15375f, .15f, .16625f, 1f};
 		float[] diffuse = new float[]{.68275f, .67f, .72525f, 1f};
-		float[] specular = new float[]{.332741f, .328634f, .346435f, 1f};
+		float[] specular = new float[]{.33274f, .32863f, .34643f, 1f};
 		float shine = 38.4f;
 
 		setMaterial(gl, ambient, diffuse, specular, shine);
@@ -75,8 +75,8 @@ public class Materials {
 
 	public static void setGreenMaterial(GL2 gl) {
 		float[] ambient = new float[]{.0215f, .1745f, .0215f, 1f};
-		float[] diffuse = new float[]{.07568f, .61424f, .07568f, 1f};
-		float[] specular = new float[]{.633f, .727811f, .633f, 1f};
+		float[] diffuse = new float[]{.0755f, .6142f, .0756f, 1f};
+		float[] specular = new float[]{.63f, .7278f, .633f, 1f};
 		float shine = 128f;
 
 		setMaterial(gl, ambient, diffuse, specular, shine);
