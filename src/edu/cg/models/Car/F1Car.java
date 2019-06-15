@@ -1,12 +1,12 @@
 package edu.cg.models.Car;
 
-import com.jogamp.opengl.GL2;
-import edu.cg.algebra.Point;
-import edu.cg.models.IRenderable;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.jogamp.opengl.*;
 
+import edu.cg.algebra.Point;
+import edu.cg.models.IRenderable;
 
 
 
@@ -70,4 +70,5 @@ public class F1Car
     retList.add(pointMatrixMult(temp, new Point(0.0D)));
     return retList;
   }
+
 }
